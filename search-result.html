@@ -8,8 +8,7 @@
     <title>GovHub Directory - Your Gateway to Government Resources</title>
 </head>
 
-<body class=" font-sans antialiased bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white mt-16">
-
+<body class="font-sans antialiased bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white mt-16">
     <!-- ----------------------------------Nav Bar---------------------------- -->
     <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 border-b border-gray-200 dark:border-gray-600 mb-8">
         <div class="container mx-auto flex items-center justify-between p-4">
@@ -60,18 +59,10 @@
         </div>
     </nav>
 
-
-
     <!-- ----------------------------------Main---------------------------- -->
 
-
-
-
-
-
-
-    <div id="searchResults">
-        <!-- Search results will be dynamically inserted here -->
+    <div class="container mx-auto flex flex-wrap mt-8 -mx-4" id="searchResults">
+        <!-- JavaScript will dynamically populate cards here -->
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
@@ -80,13 +71,13 @@
             // Function to get the search query from URL parameters
             function getSearchQuery() {
                 var urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get('q') || '';
+                return urlParams.get("q") || "";
             }
 
             // Function to display search results
             function displaySearchResults() {
                 var searchQuery = getSearchQuery();
-                document.getElementById('default-search').value = searchQuery;
+                document.getElementById("default-search").value = searchQuery;
                 // Perform additional logic to fetch and display actual search results
             }
 
@@ -94,9 +85,6 @@
             displaySearchResults();
         });
     </script>
-
-
-
 
     <form class="max-w-md mx-auto">
         <label for="default-search"
@@ -114,33 +102,34 @@
                 placeholder="Search" value="" required />
 
             <button type="submit"
-                class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                class="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                Search
+            </button>
         </div>
     </form>
 
-
-
-
-    <div class="container mx-auto flex flex-wrap  mt-8 -mx-4" id="cardContainer">
+    <div class="container mx-auto flex flex-wrap mt-8 -mx-4" id="cardContainer">
         <!-- JavaScript will dynamically populate cards here -->
     </div>
 
     <!-- ... Your existing HTML code for the footer ... -->
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener("DOMContentLoaded", function () {
             // Function to create a card element
             function createCard(item) {
-                var card = document.createElement('div');
-                card.className = 'w-full sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-4 mb-8';
+                var card = document.createElement("div");
+                card.className =
+                    "w-full sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-4 mb-8";
 
-                var truncatedDescription = item.description.length > 50
-                    ? item.description.substring(0, 50) + '...'
-                    : item.description;
+                var truncatedDescription =
+                    item.description.length > 50
+                        ? item.description.substring(0, 50) + "..."
+                        : item.description;
 
                 // Create a fixed-height wrapper for the card content
-                var cardWrapper = document.createElement('div');
-                cardWrapper.className = 'h-full';
+                var cardWrapper = document.createElement("div");
+                cardWrapper.className = "h-full";
 
                 cardWrapper.innerHTML = `
                 <div class="max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex flex-col justify-center h-full">
@@ -164,14 +153,15 @@
             }
 
             // Get the container where the cards will be appended
-            var container = document.getElementById('cardContainer');
+            var container = document.getElementById("cardContainer");
 
-            var jsonUrl = 'https://raw.githubusercontent.com/Know-Nepal/government-websites/main/data/websites.json';
+            var jsonUrl =
+                "https://raw.githubusercontent.com/Know-Nepal/government-websites/main/data/websites.json";
 
             // Fetch JSON data from the specified URL
             fetch(jsonUrl)
-                .then(response => response.json())
-                .then(jsonData => {
+                .then((response) => response.json())
+                .then((jsonData) => {
                     // Initial rendering of all cards
                     jsonData.items.forEach(function (item) {
                         var card = createCard(item);
@@ -179,33 +169,37 @@
                     });
 
                     // Handle filter change event
-                    document.getElementById('searchResults').addEventListener('change', function () {
-                        // Clear existing cards
-                        container.innerHTML = '';
+                    document
+                        .getElementById("searchResults")
+                        .addEventListener("change", function () {
+                            // Clear existing cards
+                            container.innerHTML = "";
 
-                        // Filter cards based on whether the selected value is present in item.name
-                        var selectedValue = this.value;
-                        jsonData.items.forEach(function (item) {
-                            if (selectedValue === 'all' || item.name.includes(selectedValue)) {
-                                var card = createCard(item);
-                                container.appendChild(card);
-                            }
+                            // Filter cards based on whether the selected value is present in item.name
+                            var selectedValue = this.value;
+                            jsonData.items.forEach(function (item) {
+                                if (
+                                    selectedValue === "all" ||
+                                    item.name.includes(selectedValue)
+                                ) {
+                                    var card = createCard(item);
+                                    container.appendChild(card);
+                                }
+                            });
                         });
-                    });
                 })
-                .catch(error => {
-                    console.error('Error fetching JSON data:', error);
+                .catch((error) => {
+                    console.error("Error fetching JSON data:", error);
                 });
         });
     </script>
-
-
 
     <!-- ----------------------------------Footer---------------------------- -->
     <footer
         class="fixed bottom-0 left-0 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#"
-                class="hover:underline">Know Nepal™</a>. All Rights Reserved.
+                class="hover:underline">Know Nepal™</a>. All Rights
+            Reserved.
         </span>
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
