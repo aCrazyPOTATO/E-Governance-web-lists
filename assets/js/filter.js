@@ -14,18 +14,34 @@ document.addEventListener("DOMContentLoaded", function () {
     cardWrapper.className = "h-full";
 
     cardWrapper.innerHTML = `
-        <div class="max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex flex-col justify-center h-full">
-            <img class="w-full h-56 object-contain object-center" src="https://upload.wikimedia.org/wikipedia/commons/2/23/Emblem_of_Nepal.svg" alt="${item.name}">
-            <div class="px-6 py-4">
-                <div class="font-bold text-xl mb-2 text-center">${item.name}</div>
-                <p class="text-gray-700 dark:text-gray-300 text-base text-center">${truncatedDescription}</p>
-            </div>
-            <div class="px-6 pt-4 pb-2 text-center">
-                <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
-                    Visit
-                </a>
-            </div>
+    <div class="max-w-md mx-auto bg-white dark:bg-gray-800 h-full shadow-lg rounded-lg overflow-hidden hover:bg-gray-200 dark:hover:bg-gray-700">
+    <div class="grid grid-rows-1">
+        <div class="aspect-w-16 aspect-h-9 rounded-full overflow-hidden py-4">
+            <img class="object-cover w-24 h-24 mx-auto" src="https://upload.wikimedia.org/wikipedia/commons/2/23/Emblem_of_Nepal.svg" alt="${item.name}">
         </div>
+        <div class="px-6 py-4">
+            <div class="font-semibold text-xl mb-2 text-center">${item.name}</div>
+            <p class="text-gray-700 dark:text-gray-300 text-base text-center">${truncatedDescription}</p>
+        </div>
+        <div class="flex justify-center items-center pb-4">
+            <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-full inline-block transition-colors duration-300">
+                Visit
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
     `;
 
     // Append the fixed-height wrapper to the card
