@@ -62,6 +62,22 @@
         </div>
     </nav>
 
+    <script>
+       
+        document.addEventListener("DOMContentLoaded", function () {
+           
+            const menuToggleButton = document.querySelector('[data-collapse-toggle="navbar-sticky"]');
+          
+            const menu = document.getElementById('navbar-sticky');
+    
+           
+            menuToggleButton.addEventListener('click', function () {
+               
+                menu.classList.toggle('hidden');
+            });
+        });
+    </script>
+
     <!-- ----------------------------------Search Bar---------------------------- -->
     <div class="flex items-center justify-center min-h-screen">
         <form id="searchForm" class="flex flex-col items-center w-full max-w-md mx-auto" action="search-result.html"
