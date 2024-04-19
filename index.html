@@ -64,7 +64,8 @@
 
     <!-- ----------------------------------Search Bar---------------------------- -->
     <div class="flex items-center justify-center min-h-screen">
-        <form id="searchForm" class="flex flex-col items-center w-full max-w-md mx-auto">
+        <form id="searchForm" class="flex flex-col items-center w-full max-w-md mx-auto" action="search-result.html"
+            method="get">
             <label for="voice-search" class="sr-only">Search</label>
             <div class="relative w-full">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -76,7 +77,7 @@
                             d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z" />
                     </svg>
                 </div>
-                <input type="text" id="voice-search"
+                <input type="text" id="voice-search" name="q"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 relative"
                     placeholder="Search Municipalities, Offices...." required />
                 <!-- Listening indicator on input field -->
@@ -107,10 +108,9 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script>
         function search() {
-            var searchQuery = document.getElementById('voice-search').value;
-            if (searchQuery == "") {
+            var searchQuery = document.getElementById('voice-search').value.trim();
+            if (searchQuery == "" || searchQuery == null) {
                 alert("Please Enter valid Query");
-
             }
             else {
                 window.location.href = 'search-result.html?q=' + encodeURIComponent(searchQuery);

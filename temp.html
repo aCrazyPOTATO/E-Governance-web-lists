@@ -59,7 +59,13 @@
         </div>
     </nav>
 
-    <form class="max-w-md mx-auto py-4" action="" method="get">
+    <!-- ----------------------------------Main---------------------------- -->
+
+    <div class="container mx-auto flex flex-wrap mt-8 -mx-4" id="searchResults">
+        <!-- JavaScript will dynamically populate cards here -->
+    </div>
+
+    <form class="max-w-md mx-auto" action="" method="get">
         <label for="default-search"
             class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
         <div class="relative">
@@ -81,22 +87,21 @@
         </div>
     </form>
 
-
-    <!-- ----------------------------------Main---------------------------- -->
     <div class="container mx-auto flex flex-wrap mt-8 -mx-4" id="cardContainer">
         <!-- JavaScript will dynamically populate cards here -->
     </div>
 
     <!-- ... Your existing HTML code for the footer ... -->
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
     <script>
+
         $(document).ready(function () {
             // Function to get the search query from URL parameters
             function getSearchQuery() {
                 var urlParams = new URLSearchParams(window.location.search);
                 return urlParams.get("q") || "";
             }
-
 
             // Function to display search results
             function displaySearchResults() {
@@ -107,7 +112,9 @@
 
             // Initial display of search results
             displaySearchResults();
+        });
 
+        document.addEventListener("DOMContentLoaded", function () {
             // Function to create a card element
             function createCard(item) {
                 var card = document.createElement("div");
@@ -131,7 +138,7 @@
                         <p class="text-gray-700 dark:text-gray-300 text-base text-center">${truncatedDescription}</p>
                     </div>
                     <div class="px-6 pt-4 pb-2 text-center">
-                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-6 py-2 px-4 rounded-full">
+                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full">
                             Learn More
                         </a>
                     </div>
@@ -147,32 +154,8 @@
             // Get the container where the cards will be appended
             var container = document.getElementById("cardContainer");
 
-            var jsonUrl = "https://raw.githubusercontent.com/Know-Nepal/government-websites/main/data/websites.json";
-
-            // Function to filter cards based on search query
-            function filterCards(searchQuery, jsonData) {
-                // Clear existing cards
-                container.innerHTML = "";
-
-                // Filter cards based on whether the search query matches with item.name
-                var foundResults = false; // Variable to track if any results were found
-
-                jsonData.items.forEach(function (item) {
-                    if (item.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-                        var card = createCard(item);
-                        container.appendChild(card);
-                        foundResults = true; // Set to true if at least one result is found
-                    }
-                });
-
-                // If no results were found, display a message
-                if (!foundResults) {
-                    var noResultsMessage = document.createElement("div");
-                    noResultsMessage.className = "text-center text-3xl text-gray-500 dark:text-gray-400 flex-1";
-                    noResultsMessage.textContent = "No results found for the provided query.";
-                    container.appendChild(noResultsMessage);
-                }
-            }
+            var jsonUrl =
+                "https://raw.githubusercontent.com/Know-Nepal/government-websites/main/data/websites.json";
 
             // Fetch JSON data from the specified URL
             fetch(jsonUrl)
@@ -184,26 +167,25 @@
                         container.appendChild(card);
                     });
 
-                    // Get the search query from the URL
-                    var searchQuery = getSearchQuery();
+                    // Handle filter change event
+                    document
+                        .getElementById("searchResults")
+                        .addEventListener("change", function () {
+                            // Clear existing cards
+                            container.innerHTML = "";
 
-                    // Display search results based on the search query
-                    filterCards(searchQuery, jsonData);
-
-                    // Handle form submission event
-                    document.querySelector("form").addEventListener("submit", function (event) {
-                        // Prevent the default form submission behavior
-                        event.preventDefault();
-
-                        // Get the search query from the input field
-                        var inputQuery = document.getElementById("default-search").value.trim();
-
-                        // Update the URL with the new search query
-                        history.pushState({}, "", "?q=" + encodeURIComponent(inputQuery));
-
-                        // Filter and display cards based on the search query
-                        filterCards(inputQuery, jsonData);
-                    });
+                            // Filter cards based on whether the selected value is present in item.name
+                            var selectedValue = this.value;
+                            jsonData.items.forEach(function (item) {
+                                if (
+                                    selectedValue === getSearchQuery() || selectedValue === "all" 
+                                    
+                                ) {
+                                    var card = createCard(item);
+                                    container.appendChild(card);
+                                }
+                            });
+                        });
                 })
                 .catch((error) => {
                     console.error("Error fetching JSON data:", error);
@@ -236,3 +218,4 @@
 </body>
 
 </html>
+
