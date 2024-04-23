@@ -30,19 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    `;
+`;
 
     // Append the fixed-height wrapper to the card
     card.appendChild(cardWrapper);

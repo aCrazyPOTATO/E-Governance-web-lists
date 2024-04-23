@@ -14,7 +14,7 @@
     <nav
         class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
         <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
+            <a href="index.html" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <img src="assets/logo.png" class="h-8" alt="GovWeb Logo" />
                 <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">GovWeb</span>
             </a>
@@ -39,8 +39,7 @@
                     class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
                     <li>
                         <a href="index.html"
-                            class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500"
-                            aria-current="page">Home</a>
+                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Home</a>
                     </li>
                     <li>
                         <a href="listing.html"
@@ -85,156 +84,37 @@
 
 
     <!-- ----------------------------------Main---------------------------- -->
-    <div class="container mx-auto flex flex-wrap mt-8 -mx-4" id="cardContainer">
+    <div class="container mx-auto flex flex-wrap mt-8 -mx-4 pb-12" id="cardContainer">
         <!-- JavaScript will dynamically populate cards here -->
     </div>
 
-    <!-- ... Your existing HTML code for the footer ... -->
+
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            // Function to get the search query from URL parameters
-            function getSearchQuery() {
-                var urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get("q") || "";
-            }
 
 
-            // Function to display search results
-            function displaySearchResults() {
-                var searchQuery = getSearchQuery();
-                document.getElementById("default-search").value = searchQuery;
-                // Perform additional logic to fetch and display actual search results
-            }
 
-            // Initial display of search results
-            displaySearchResults();
-
-            // Function to create a card element
-            function createCard(item) {
-                var card = document.createElement("div");
-                card.className =
-                    "w-full sm:w-1/2 md:w-1/4 lg:w-1/4 xl:w-1/4 px-4 mb-8";
-
-                var truncatedDescription =
-                    item.description.length > 50
-                        ? item.description.substring(0, 50) + "..."
-                        : item.description;
-
-                // Create a fixed-height wrapper for the card content
-                var cardWrapper = document.createElement("div");
-                cardWrapper.className = "h-full";
-
-                cardWrapper.innerHTML = `
-                <div class="max-w-sm mx-auto bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden flex flex-col justify-center h-full">
-                    <img class="w-full h-56 object-contain object-center" src="https://upload.wikimedia.org/wikipedia/commons/2/23/Emblem_of_Nepal.svg" alt="${item.name}">
-                    <div class="px-6 py-4">
-                        <div class="font-bold text-xl mb-2 text-center">${item.name}</div>
-                        <p class="text-gray-700 dark:text-gray-300 text-base text-center">${truncatedDescription}</p>
-                    </div>
-                    <div class="px-6 pt-4 pb-2 text-center">
-                        <a href="${item.url}" target="_blank" rel="noopener noreferrer" class="bg-blue-500 hover:bg-blue-700 text-white font-bold my-6 py-2 px-4 rounded-full">
-                            Learn More
-                        </a>
-                    </div>
-                </div>
-            `;
-
-                // Append the fixed-height wrapper to the card
-                card.appendChild(cardWrapper);
-
-                return card;
-            }
-
-            // Get the container where the cards will be appended
-            var container = document.getElementById("cardContainer");
-
-            var jsonUrl = "https://raw.githubusercontent.com/Know-Nepal/government-websites/main/data/websites.json";
-
-            // Function to filter cards based on search query
-            function filterCards(searchQuery, jsonData) {
-                // Clear existing cards
-                container.innerHTML = "";
-
-                // Filter cards based on whether the search query matches with item.name
-                var foundResults = false; // Variable to track if any results were found
-
-                jsonData.items.forEach(function (item) {
-                    if (item.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-                        var card = createCard(item);
-                        container.appendChild(card);
-                        foundResults = true; // Set to true if at least one result is found
-                    }
-                });
-
-                // If no results were found, display a message
-                if (!foundResults) {
-                    var noResultsMessage = document.createElement("div");
-                    noResultsMessage.className = "text-center text-3xl text-gray-500 dark:text-gray-400 flex-1";
-                    noResultsMessage.textContent = "No results found for the provided query.";
-                    container.appendChild(noResultsMessage);
-                }
-            }
-
-            // Fetch JSON data from the specified URL
-            fetch(jsonUrl)
-                .then((response) => response.json())
-                .then((jsonData) => {
-                    // Initial rendering of all cards
-                    jsonData.items.forEach(function (item) {
-                        var card = createCard(item);
-                        container.appendChild(card);
-                    });
-
-                    // Get the search query from the URL
-                    var searchQuery = getSearchQuery();
-
-                    // Display search results based on the search query
-                    filterCards(searchQuery, jsonData);
-
-                    // Handle form submission event
-                    document.querySelector("form").addEventListener("submit", function (event) {
-                        // Prevent the default form submission behavior
-                        event.preventDefault();
-
-                        // Get the search query from the input field
-                        var inputQuery = document.getElementById("default-search").value.trim();
-
-                        // Update the URL with the new search query
-                        history.pushState({}, "", "?q=" + encodeURIComponent(inputQuery));
-
-                        // Filter and display cards based on the search query
-                        filterCards(inputQuery, jsonData);
-                    });
-                })
-                .catch((error) => {
-                    console.error("Error fetching JSON data:", error);
-                });
-        });
-    </script>
 
     <!-- ----------------------------------Footer---------------------------- -->
     <footer
         class="fixed bottom-0 left-0 w-full p-4 bg-white border-t border-gray-200 shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600">
         <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a href="#"
-                class="hover:underline">aCrazyPOTATO</a>. All Rights
-            Reserved.
+                class="hover:underline">aCrazyPOTATO</a>. All Rights Reserved.
         </span>
         <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
-                <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                <a href="about.html" class="hover:underline me-4 md:me-6">About</a>
             </li>
             <li>
-                <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                <a href="https://github.com/Know-Nepal/government-websites/blob/main/LICENSE"
+                    class="hover:underline me-4 md:me-6" target="_blank">Licensing</a>
             </li>
             <li>
-                <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
-            </li>
-            <li>
-                <a href="#" class="hover:underline">Contact</a>
+                <a href="contact.html" class="hover:underline">Contact</a>
             </li>
         </ul>
     </footer>
+    <script src="assets/js/result.js"></script>
+
 </body>
 
 </html>
