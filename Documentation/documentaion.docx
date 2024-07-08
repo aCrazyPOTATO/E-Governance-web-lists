@@ -1,1 +1,6 @@
-Hello
+Chapter 1: Introduction
+1.1 Background
+The government of Nepal has numerous online portals and websites aimed at providing various services to its citizens. However, finding the relevant government website can often be a challenge. This project aims to create a centralized website that lists all government websites of Nepal along with their respective links, making it easier for citizens and officials to access information and services. This initiative is part of the practical requirements for the e-governance subject in the CSIT 6th semester at TU Nepal.
+1.2 Problem Statement
+In the current digital age, citizens expect quick and easy access to government services online. However, the dispersion of government websites across different domains and the lack of a centralized directory lead to inefficiencies. Citizens often struggle to find the correct websites for their needs, resulting in a waste of time and resources. There is a need for a unified platform that lists all government websites in Nepal, making it easier for citizens to find the information they seek.
+
