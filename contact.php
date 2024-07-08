@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <title>GovHub Directory - Your Gateway to Government Resources</title>
+    <link rel="icon" type="image/x-icon" href="assets/logo.png">
+
 </head>
 
 <body class=" font-sans antialiased bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white mt-16">
