@@ -63,17 +63,17 @@ Contributions are welcome! If you have any suggestions or improvements, please c
 
 1. **Fork the repository.**
 2. **Create a new branch:**
-   \`\`\`bash
+   ```bash
    git checkout -b feature-branch
-   \`\`\`
+   ```
 3. **Make your changes and commit them:**
-   \`\`\`bash
+   ```bash
    git commit -m 'Add new feature'
-   \`\`\`
+   ```
 4. **Push to the branch:**
-   \`\`\`bash
+   ```bash
    git push origin feature-branch
-   \`\`\`
+   ```
 5. **Create a pull request.**
 
 ## License
