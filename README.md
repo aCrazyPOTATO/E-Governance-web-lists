@@ -37,14 +37,16 @@ The primary goal of this project is to provide a centralized platform where user
 To run this project locally, follow these steps:
 
 1. **Clone the repository:**
-   \`\`\`bash
+
+   ```bash
    git clone https://github.com/acrazypotato/e-governance-web-lists.git
-   \`\`\`
+   ```
 
 2. **Navigate to the project directory:**
-   \`\`\`bash
+
+   ```bash
    cd e-governance-web-lists
-   \`\`\`
+   ```
 
 3. **Open the \`index.html\` file in your browser to view the homepage.**
 
