@@ -31,11 +31,12 @@
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="M4 6h16M4 12h16m-7 6h7"></path>
                     </svg>
-                </button>
+                </button><a href="https://github.com/Know-Nepal/government-websites">
                 <button type="button"
                     class="hidden md:inline-flex items-center text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Wanna Contribute?
                 </button>
+                </a>
             </div>
             <div class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
                 <ul
